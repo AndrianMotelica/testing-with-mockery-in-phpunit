@@ -7,7 +7,7 @@ use App\Email;
 use App\ShipmentDetails;
 use App\ShipmentType;
 use InvalidArgumentException;
-use Mockery as m;
+use Mockery;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Mockery\MockInterface;
 use PHPUnit\Framework\TestCase;
@@ -33,14 +33,14 @@ class ShipmentDetailsTest extends TestCase
         ];
 
         /** @var ShipmentType&MockInterface $emailMock */
-        $shipmentTypeMock = m::mock('alias:'.ShipmentType::class);
+        $shipmentTypeMock = Mockery::mock('alias:'.ShipmentType::class);
         $shipmentTypeMock->shouldReceive('freight')
             ->with($freightType)
             ->andReturn($freightType)
             ->once();
 
         /** @var Address&MockInterface $addressMock */
-        $addressMock = m::mock('overload:'.Address::class);
+        $addressMock = Mockery::mock('overload:'.Address::class);
         $addressMock->shouldReceive('setStreet')
             ->with($street)
             ->once();
@@ -52,7 +52,7 @@ class ShipmentDetailsTest extends TestCase
             ->once();
 
         /** @var ShipmentType&MockInterface $emailMock */
-        $shipmentTypeMock = m::mock('alias:'.Email::class);
+        $shipmentTypeMock = Mockery::mock('alias:'.Email::class);
         $shipmentTypeMock->shouldReceive('send')
             ->with($email)
             ->andReturn('e-Mail sent to: '. $email)
@@ -77,13 +77,13 @@ class ShipmentDetailsTest extends TestCase
         $this->expectException(InvalidArgumentException::class);
 
         /** @var Address&MockInterface $addressMock */
-        $addressMock = m::mock('overload:'.Address::class);
+        $addressMock = Mockery::mock('overload:'.Address::class);
         $addressMock->shouldReceive('getEmail')
             ->andReturn($invalidEmail)
             ->once();
 
         /** @var ShipmentType&MockInterface $emailMock */
-        $shipmentTypeMock = m::mock('alias:'.Email::class);
+        $shipmentTypeMock = Mockery::mock('alias:'.Email::class);
         $shipmentTypeMock->shouldReceive('send')
             ->with($invalidEmail)
             ->once()
