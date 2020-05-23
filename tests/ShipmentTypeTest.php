@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 class ShipmentTypeTest extends TestCase
 {
 
-    public function testFreight(): void
+    public function test_Freight(): void
     {
         $this->assertSame(
             'Train',
@@ -17,7 +17,7 @@ class ShipmentTypeTest extends TestCase
         );
     }
 
-    public function testFreightException(): void
+    public function test_Freight_Exception(): void
     {
         $this->expectException(InvalidArgumentException::class);
 
